@@ -2,7 +2,6 @@ document.addEventListener("DOMContentLoaded", function () {
     updateCartCount();
     displayCartItems();
 
-    // Event delegation for dynamically added "Add to Cart" buttons
     document.body.addEventListener("click", function (event) {
         if (event.target.classList.contains("add")) {
             let productId = parseInt(event.target.dataset.id); // Ensure it's a number
@@ -15,7 +14,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // Event delegation for dynamically added "Remove" buttons
     document.body.addEventListener("click", function (event) {
         if (event.target.classList.contains("remove-item")) {
             let productId = parseInt(event.target.dataset.id);
@@ -23,7 +21,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // Event delegation for quantity change in the cart
     document.body.addEventListener("input", function (event) {
         if (event.target.classList.contains("quantity-input")) {
             let productId = parseInt(event.target.dataset.id);
@@ -38,7 +35,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-// Function to Add Item to Cart
 function addToCart(id, name, price) {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
@@ -52,14 +48,12 @@ function addToCart(id, name, price) {
     localStorage.setItem("cart", JSON.stringify(cart));
 }
 
-// Function to Update Cart Count in Header
 function updateCartCount() {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
     let totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
     document.getElementById("cart-count").textContent = totalItems;
 }
 
-// Function to Display Cart Items in the Hover Cart
 function displayCartItems() {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
     let cartItemsContainer = document.getElementById("cart-items");
@@ -87,7 +81,6 @@ function displayCartItems() {
     }
 }
 
-// Function to Update Cart Item Quantity
 function updateCartQuantity(id, quantity) {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
     let item = cart.find(product => product.id === id);
@@ -99,7 +92,6 @@ function updateCartQuantity(id, quantity) {
     }
 }
 
-// Function to Remove an Item from Cart
 function removeItem(id) {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
     cart = cart.filter(product => product.id !== id);
